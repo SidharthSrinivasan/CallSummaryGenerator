@@ -1,0 +1,19 @@
+{
+  "call_info": {
+    "customer_name": "Michael Lee",
+    "agent_name": "Sarah"
+  },
+  "conversation_highlights": [
+    "Customer had trouble accessing dashboard since yesterday evening",
+    "Issue occurred on laptop using Chrome and Firefox",
+    "Agent confirmed temporary outage between 5:30 PM and 11 AM",
+    "Customer's data from last two days was missing"
+  ],
+  "action_items": [
+    {
+      "task": "Follow up on data recovery",
+      "assigned_to": "Backend team",
+      "due": "Tomorrow noon"
+    }
+  ]
+}
