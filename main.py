@@ -4,7 +4,8 @@ from word_writer import write_summary_to_word
 from summarizer import load_summarizer, summarize_transcript
 import torch
 import argparse
-from transcribe_voice import transcribe_audio
+#from transcribe_voice import transcribe_audio
+from db_utils import save_summary_to_db
 
 # Ensure CUDA GPU is available for model acceleration
 if not torch.cuda.is_available():
@@ -22,11 +23,11 @@ parser.add_argument('--whisper_model', type=str, default='base', help='Whisper m
 args = parser.parse_args()
 
 # Determine transcript source
-if args.audio:
-    print(f"Transcribing audio file: {args.audio} using Whisper model '{args.whisper_model}'...")
-    sample_transcript = transcribe_audio(args.audio, args.whisper_model)
-    print("Audio transcription complete.")
-elif args.transcript:
+# if args.audio:
+#     print(f"Transcribing audio file: {args.audio} using Whisper model '{args.whisper_model}'...")
+#     sample_transcript = transcribe_audio(args.audio, args.whisper_model)
+#     print("Audio transcription complete.")
+if args.transcript:
     transcript_file = args.transcript
     with open(transcript_file, "r", encoding="utf-8") as tf:
         sample_transcript = tf.read()
@@ -46,6 +47,11 @@ try:
 
     # Write the summary data to a Word document in full sentences
     write_summary_to_word(summary_data)
+    print("Summary data written to summary_output.docx (Word document)")
+
+    # Save the summary data to the database
+    save_summary_to_db(summary_data)
+    print("Summary data saved to the database.")
 
 except json.JSONDecodeError as e:
     # Handle JSON parsing errors from the model output

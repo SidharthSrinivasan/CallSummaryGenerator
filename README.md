@@ -79,3 +79,42 @@ summary_output.docx
 
 ## 🤝 Contributing
 Feel free to open issues or contribute improvements!
+
+---
+
+## 🗄️ Database Usage
+This project uses **PostgreSQL** to store call summaries. The table schema is defined in `schema_migration.py`.
+
+### 1. Set Up the Database
+- Ensure PostgreSQL is installed and running.
+- Create a database named `call_summaries` (or update the name in `schema_migration.py`).
+- Set the environment variable `PGPASSWORD` to your PostgreSQL password:
+  
+  ```powershell
+  $env:PGPASSWORD = "your_postgres_password"
+  ```
+
+### 2. Run the Schema Migration
+To create the required table, run:
+
+```powershell
+python schema_migration.py
+```
+
+### 3. Check the Database Contents
+You can view the saved summaries using the `psql` command-line tool:
+
+```powershell
+psql -U postgres -d call_summaries -h localhost -c "SELECT * FROM call_summaries;"
+```
+
+Or use a GUI tool like **pgAdmin**.
+
+---
+
+## ⚙️ Installation
+Install all dependencies with:
+
+```powershell
+pip install -r requirements.txt
+```
